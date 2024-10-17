@@ -12,7 +12,7 @@
        - name: Set up Python
          uses: actions/setup-python@v2
          with:
-           python-version: '3.x'  # укажите нужную вам версию Python
+           python-version: '3.x'  # Убедитесь, что здесь указана правильная версия Python
 
        - name: Install dependencies
          run: |
@@ -20,5 +20,4 @@
            pip install pandas
 
        - name: Run script
-         run: python Acc.py
-   
+         run: python Acc.py  # Убедитесь, что здесь указано правильное имя файла
