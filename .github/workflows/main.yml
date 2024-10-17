@@ -1,8 +1,7 @@
 name: Calculate Acceptance Rate
 
 on:
-  schedule:
-    - cron: '* * * * *' # Запуск каждые час
+ workflow_dispatch: # Включает ручной запуск
 
 jobs:
   calculate-acceptance-rate:
