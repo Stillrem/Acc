@@ -10,8 +10,7 @@
     <div class="calculator">
         <div id="acceptance-rate" class="display">Acceptance Rate: 0.00%</div>
         <div class="cells">
-            <!-- Создание 100 ячеек -->
-            ${Array.from({ length: 100 }, (_, i) => `<div id="cell-${i}" class="cell"></div>`).join('')}
+            <!-- Ячейки будут динамически добавлены с помощью JavaScript -->
         </div>
         <div class="buttons">
             <button class="button accept" onclick="paint('green')">Accepting</button>
