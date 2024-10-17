@@ -9,68 +9,51 @@ body {
 }
 
 .calculator {
-    width: 300px;
-    background-color: #333;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .display {
-    background-color: #444;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
+    margin-bottom: 20px;
     font-size: 1.5em;
+    text-align: center;
 }
 
 .cells {
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-gap: 2px;
-    padding: 10px;
-    background-color: #444;
+    grid-template-columns: repeat(10, 20px);
+    gap: 5px;
+    margin-bottom: 20px;
 }
 
 .cell {
-    width: 100%;
-    padding-top: 100%; /* 1:1 Aspect Ratio */
-    position: relative;
-    background-color: #fff;
-}
-
-.cell:after {
-    content: '';
-    display: block;
-    padding-top: 100%;
+    width: 20px;
+    height: 20px;
+    background-color: #FFFFFF;
+    border: 1px solid #ccc;
 }
 
 .buttons {
     display: flex;
-    justify-content: space-around;
-    padding: 20px;
-    background-color: #444;
+    justify-content: space-between;
 }
 
 .button {
     padding: 10px 20px;
     font-size: 1em;
-    color: #fff;
+    cursor: pointer;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-    width: 40%;
-    text-align: center;
 }
 
 .accept {
     background-color: #4CAF50;
+    color: white;
 }
 
 .decline {
-    background-color: #F44336;
-}
-
-.button:hover {
-    opacity: 0.8;
+    background-color: #f44336;
+    color: white;
 }
