@@ -2,7 +2,7 @@ name: Calculate Acceptance Rate
 
 on:
   schedule:
-    - cron: '0 * * * *' # Запуск каждые час
+    - cron: '* * * * *' # Запуск каждые час
 
 jobs:
   calculate-acceptance-rate:
