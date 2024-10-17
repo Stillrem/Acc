@@ -23,4 +23,4 @@ jobs:
           # Установите зависимости, если они есть
 
       - name: Run order calculation
-        run: python Acc.py
+        run: python acc.py
