@@ -5,7 +5,7 @@ let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 function updateRates() {
     const acceptanceRate = (acceptedCount / 100) * 100;
     const declinedRate = (declinedCount / 100) * 100;
-    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}% | Declined Rate: ${declinedRate.toFixed(2)}%`;
+    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}% Declined Rate: ${declinedRate.toFixed(2)}%`;
 }
 
 function paint(color) {
