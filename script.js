@@ -1,21 +1,17 @@
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#FFFFFF');
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
-let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 
-function updateRates() {
+function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
-    const declinedRate = (declinedCount / 100) * 100;
-    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}% Declined Rate: ${declinedRate.toFixed(2)}%`;
+    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
 }
 
 function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
-    // Уменьшаем соответствующий счетчик, если самая старая ячейка была зелёной или красной
+    // Уменьшаем счетчик, если самая старая ячейка была зелёной
     if (cellColors[99] === '#00FF00') {
         acceptedCount--;
-    } else if (cellColors[99] === '#FF0000') {
-        declinedCount--;
     }
 
     // Сдвигаем все ячейки на одну вправо
@@ -28,18 +24,16 @@ function paint(color) {
     cellColors[0] = colorCode;
     document.getElementById('cell-0').style.backgroundColor = colorCode;
 
-    // Увеличиваем соответствующий счетчик, если новая ячейка зелёная или красная
+    // Увеличиваем счетчик, если новая ячейка зелёная
     if (colorCode === '#00FF00') {
         acceptedCount++;
-    } else if (colorCode === '#FF0000') {
-        declinedCount++;
     }
 
     // Сохраняем массив в localStorage
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
 
-    // Обновляем проценты
-    updateRates();
+    // Обновляем процент принятия
+    updateAcceptanceRate();
 }
 
 // Инициализация начальных цветов ячеек
@@ -52,5 +46,5 @@ window.onload = function() {
         cell.style.backgroundColor = cellColors[i];
         cellsContainer.appendChild(cell);
     }
-    updateRates();
+    updateAcceptanceRate();
 };
