@@ -7,6 +7,6 @@
 .grid-item {
     width: 40px;
     height: 40px;
-    background-color: #000000; /* Черный фон */
-    border: 1px solid #FFF; /* Белая граница для контраста */
+    background-color: #FFFFFF;
+    border: 1px solid #000;
 }
