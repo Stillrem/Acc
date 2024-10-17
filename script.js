@@ -48,14 +48,3 @@ window.onload = function() {
     }
     updateAcceptanceRate();
 };
-
-// Обработка двойного нажатия
-document.querySelectorAll('.button').forEa
-ch(button => {
-button.addEventListener('dblclick',
-function(event) {
-event.preventDefault); //
-Предотвращаем стандартное поведение двойного нажатия
-// Дополнительная логика может быть добавлена здесь, если необходимо
- }; 
-};
