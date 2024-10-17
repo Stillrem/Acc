@@ -1,11 +1,10 @@
 import json
 
-# Пример данных о заказах
 orders = [
-    # Здесь должны быть ваши заказы в формате, например:
+
     {"id": 1, "status": "accepted"},
     {"id": 2, "status": "cancelled"},
-    # ...
+    
 ]
 
 def calculate_orders(orders):
