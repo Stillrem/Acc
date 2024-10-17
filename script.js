@@ -1,5 +1,5 @@
-const cellColors = Array(100).fill('#FFFFFF');
-let acceptedCount = 0;
+const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#FFFFFF');
+let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
@@ -29,6 +29,17 @@ function paint(color) {
         acceptedCount++;
     }
 
+    // Сохраняем массив в localStorage
+    localStorage.setItem('cellColors', JSON.stringify(cellColors));
+
     // Обновляем процент принятия
     updateAcceptanceRate();
 }
+
+// Инициализация начальных цветов ячеек
+window.onload = function() {
+    for (let i = 0; i < cellColors.length; i++) {
+        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
+    }
+    updateAcceptanceRate();
+};
