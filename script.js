@@ -9,27 +9,32 @@ function updateAcceptanceRate() {
 function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
-    // Уменьшаем счетчик, если самая старая ячейка была зелёной
     if (cellColors[99] === '#00FF00') {
         acceptedCount--;
     }
 
-    // Сдвигаем все ячейки на одну вправо
     for (let i = cellColors.length - 1; i > 0; i--) {
         cellColors[i] = cellColors[i - 1];
         document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
     }
 
-    // Устанавливаем новый цвет в первую ячейку
     cellColors[0] = colorCode;
     document.getElementById('cell-0').style.backgroundColor = colorCode;
 
-    // Увеличиваем счетчик, если новая ячейка зелёная
     if (colorCode === '#00FF00') {
         acceptedCount++;
     }
 
-    // Сохраняем массив в localStorage
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
+    updateAcceptanceRate();
+}
 
-    // Об
+document.addEventListener('DOMContentLoaded', () => {
+    const cellsContainer = document.querySelector('.cells');
+    cellsContainer.innerHTML = Array.from({ length: 100 }, (_, i) => `<div id="cell-${i}" class="cell"></div>`).join('');
+    
+    cellColors.forEach((color, index) => {
+        document.getElementById(`cell-${index}`).style.backgroundColor = color;
+    });
+    updateAcceptanceRate();
+});
