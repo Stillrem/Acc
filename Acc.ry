@@ -1,0 +1,21 @@
+import pandas as pd
+
+# Пример данных заказов
+data = {
+    'order_id': [1, 2, 3, 4, 5],
+    'status': ['accepted', 'rejected', 'accepted', 'accepted', 'rejected']
+}
+
+# Создаём DataFrame
+df = pd.DataFrame(data)
+
+# Подсчитываем общее количество заказов
+total_orders = df.shape[0]
+
+# Подсчитываем количество принятых заказов
+accepted_orders = df[df['status'] == 'accepted'].shape[0]
+
+# Вычисляем процент принятия
+acceptance_rate = (accepted_orders / total_orders) * 100
+
+print(f"Процент принятия заказов: {acceptance_rate:.2f}%")
