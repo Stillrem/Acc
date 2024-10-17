@@ -60,6 +60,7 @@ body {
     flex: 1;
     margin: 0 5px;
     color: white;
+    touch-action: manipulation;
 }
 
 .accept {
