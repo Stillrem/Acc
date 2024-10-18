@@ -58,4 +58,10 @@ window.onload = function() {
             console.error('Service Worker registration failed:', error);
         });
     }
+    
+    // Отключение двойного тапа для увеличения
+  document.addEventListener('dblclick', function(event) {
+    event.preventDefault();
+ }, { passive: false });
+
 };
