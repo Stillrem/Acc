@@ -1,26 +1,31 @@
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#FFFFFF');
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
+let currentColor = '#00FF00'; // По умолчанию зелёный
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
 }
 
-function paintCell(cellIndex) {
-    const cell = document.getElementById(`cell-${cellIndex}`);
-    if (cellColors[cellIndex] === '#00FF00') {
+function setCurrentColor(color) {
+    currentColor = color === 'red' ? '#FF0000' : '#00FF00';
+}
+
+function toggleCellColor(index) {
+    const cell = document.getElementById(`cell-${index}`);
+    const previousColor = cell.style.backgroundColor;
+    cell.style.backgroundColor = currentColor;
+    if (previousColor === '#00FF00') {
         acceptedCount--;
-        cellColors[cellIndex] = '#FF0000';  // Перекрашиваем в красный
-    } else {
-        acceptedCount++;
-        cellColors[cellIndex] = '#00FF00';  // Перекрашиваем в зеленый
     }
-    cell.style.backgroundColor = cellColors[cellIndex];
+    if (currentColor === '#00FF00') {
+        acceptedCount++;
+    }
+    cellColors[index] = currentColor;
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
 }
 
-// Инициализация начальных цветов ячеек
 window.onload = function() {
     const cellsContainer = document.querySelector('.cells');
     for (let i = 0; i < cellColors.length; i++) {
@@ -28,12 +33,11 @@ window.onload = function() {
         cell.className = 'cell';
         cell.id = `cell-${i}`;
         cell.style.backgroundColor = cellColors[i];
-        cell.addEventListener('click', () => paintCell(i));  // Добавляем обработчик клика
+        cell.addEventListener('click', () => toggleCellColor(i));
         cellsContainer.appendChild(cell);
     }
     updateAcceptanceRate();
 
-    // Регистрация сервис-воркера
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
         .then(registration => {
@@ -43,8 +47,7 @@ window.onload = function() {
             console.error('Service Worker registration failed:', error);
         });
     }
-    
-    // Отключение двойного тапа для увеличения
+
     document.addEventListener('dblclick', function(event) {
         event.preventDefault();
     }, { passive: false });
