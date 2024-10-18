@@ -6,37 +6,23 @@ function updateAcceptanceRate() {
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
 }
 
-function paint(color) {
-    const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
+function toggleCellColor(cell, index) {
+    const currentColor = cellColors[index];
+    const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
 
-    // Уменьшаем счетчик, если самая старая ячейка была зелёной
-    if (cellColors[99] === '#00FF00') {
+    cellColors[index] = newColor;
+    cell.style.backgroundColor = newColor;
+
+    if (newColor === '#00FF00') {
+        acceptedCount++;
+    } else {
         acceptedCount--;
     }
 
-    // Сдвигаем все ячейки на одну вправо
-    for (let i = cellColors.length - 1; i > 0; i--) {
-        cellColors[i] = cellColors[i - 1];
-        document.getElementById(`cell-${i}`).style.backgroundColor = cellColors[i];
-    }
-
-    // Устанавливаем новый цвет в первую ячейку
-    cellColors[0] = colorCode;
-    document.getElementById('cell-0').style.backgroundColor = colorCode;
-
-    // Увеличиваем счетчик, если новая ячейка зелёная
-    if (colorCode === '#00FF00') {
-        acceptedCount++;
-    }
-
-    // Сохраняем массив в localStorage
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
-
-    // Обновляем процент принятия
     updateAcceptanceRate();
 }
 
-// Инициализация начальных цветов ячеек
 window.onload = function() {
     const cellsContainer = document.querySelector('.cells');
     for (let i = 0; i < cellColors.length; i++) {
@@ -44,11 +30,11 @@ window.onload = function() {
         cell.className = 'cell';
         cell.id = `cell-${i}`;
         cell.style.backgroundColor = cellColors[i];
+        cell.addEventListener('click', () => toggleCellColor(cell, i)); // Добавлен обработчик клика
         cellsContainer.appendChild(cell);
     }
     updateAcceptanceRate();
 
-    // Регистрация сервис-воркера
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
         .then(registration => {
@@ -58,10 +44,9 @@ window.onload = function() {
             console.error('Service Worker registration failed:', error);
         });
     }
-    
-    // Отключение двойного тапа для увеличения
-  document.addEventListener('dblclick', function(event) {
-    event.preventDefault();
- }, { passive: false });
 
+    // Отключение двойного тапа для увеличения
+    document.addEventListener('dblclick', function(event) {
+        event.preventDefault();
+    }, { passive: false });
 };
