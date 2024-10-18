@@ -5,15 +5,15 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #121212; /* Тёмный фон */
 }
 
 .calculator {
     width: 380px;
-    background-color: #fff;
+    background-color: #1e1e1e; /* Тёмный цвет для калькулятора */
     padding: 20px;
     border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,7 +24,8 @@ body {
     font-size: 1.5em;
     text-align: center;
     width: 100%;
-    background: #e0e0e0;
+    background: #2c2c2c; /* Тёмный цвет для дисплея */
+    color: #ffffff; /* Светлый текст */
     padding: 10px;
     border-radius: 10px;
 }
@@ -40,9 +41,9 @@ body {
 .cell {
     width: 30px;
     height: 30px;
-    background-color: #FFFFFF;
+    background-color: #1e1e1e; /* Тёмный цвет для ячеек */
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #333333; /* Тёмная граница */
 }
 
 .buttons {
@@ -64,9 +65,9 @@ body {
 }
 
 .accept {
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* Можно оставить, если хотите сохранить цвет кнопки */
 }
 
 .decline {
-    background-color: #f44336;
+    background-color: #f44336; /* Можно оставить, если хотите сохранить цвет кнопки */
 }
