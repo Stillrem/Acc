@@ -6,23 +6,21 @@ function updateAcceptanceRate() {
     document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
 }
 
-function toggleCellColor(cell, index) {
-    const currentColor = cellColors[index];
-    const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
-
-    cellColors[index] = newColor;
-    cell.style.backgroundColor = newColor;
-
-    if (newColor === '#00FF00') {
-        acceptedCount++;
-    } else {
+function paintCell(cellIndex) {
+    const cell = document.getElementById(`cell-${cellIndex}`);
+    if (cellColors[cellIndex] === '#00FF00') {
         acceptedCount--;
+        cellColors[cellIndex] = '#FF0000';  // Перекрашиваем в красный
+    } else {
+        acceptedCount++;
+        cellColors[cellIndex] = '#00FF00';  // Перекрашиваем в зеленый
     }
-
+    cell.style.backgroundColor = cellColors[cellIndex];
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
 }
 
+// Инициализация начальных цветов ячеек
 window.onload = function() {
     const cellsContainer = document.querySelector('.cells');
     for (let i = 0; i < cellColors.length; i++) {
@@ -30,11 +28,12 @@ window.onload = function() {
         cell.className = 'cell';
         cell.id = `cell-${i}`;
         cell.style.backgroundColor = cellColors[i];
-        cell.addEventListener('click', () => toggleCellColor(cell, i)); // Добавлен обработчик клика
+        cell.addEventListener('click', () => paintCell(i));  // Добавляем обработчик клика
         cellsContainer.appendChild(cell);
     }
     updateAcceptanceRate();
 
+    // Регистрация сервис-воркера
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
         .then(registration => {
@@ -44,7 +43,7 @@ window.onload = function() {
             console.error('Service Worker registration failed:', error);
         });
     }
-
+    
     // Отключение двойного тапа для увеличения
     document.addEventListener('dblclick', function(event) {
         event.preventDefault();
