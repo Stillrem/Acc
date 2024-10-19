@@ -5,7 +5,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background: linear-gradient(135deg, #202025, #292930);
+    background: linear-gradient(135deg, #1a1a1d, #1f1f22);
     padding: 20px 0;
 }
 
@@ -62,8 +62,9 @@ body {
     transition: transform 0.2s, background-color 0.2s;
 }
 
-.cell:hover {
-    transform: scale(1.1);
+.cell:hover, .cell:active {
+    transform: scale(0.9);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .buttons {
@@ -86,8 +87,9 @@ body {
     transition: transform 0.2s, background-color 0.2s;
 }
 
-.button:active, .cell:active {
+.button:active {
     transform: scale(0.95);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .accept {
