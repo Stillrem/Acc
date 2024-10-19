@@ -1,27 +1,20 @@
-let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
-let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
-const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#FFFFFF');
-let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
-
-function updateAcceptanceRate() {
-    const acceptanceRate = (acceptedCount / 100) * 100;
-    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
+// Function to count red cells
+function countRedCells() {
+    return cellColors.filter(color => color === '#FF0000').length;
 }
 
-function updateDisplayCounts() {
-    document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declineCount;
-    localStorage.setItem('acceptCount', acceptCount);
-    localStorage.setItem('declineCount', declineCount);
+function updateRedCellDisplay() {
+    const redCellCount = countRedCells();
+    document.getElementById('decline-count').textContent = redCellCount;
+    localStorage.setItem('declineCount', redCellCount);
 }
 
+// Update existing functions to use the new red cell counting logic
 function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
     if (colorCode === '#00FF00') {
         acceptCount++;
-    } else {
-        declineCount++;
     }
     updateDisplayCounts();
 
@@ -43,6 +36,7 @@ function paint(color) {
 
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
+    updateRedCellDisplay(); // Update red cell count display
 }
 
 function toggleCellColor(cellIndex) {
@@ -61,6 +55,7 @@ function toggleCellColor(cellIndex) {
 
         localStorage.setItem('cellColors', JSON.stringify(cellColors));
         updateAcceptanceRate();
+        updateRedCellDisplay(); // Update red cell count display
     }
 }
 
@@ -69,8 +64,13 @@ function resetCount(type) {
         acceptCount = 0;
     } else if (type === 'decline') {
         declineCount = 0;
+        cellColors.fill('#FFFFFF'); // Reset all cells to white
+        for (let i = 0; i < cellColors.length; i++) {
+            document.getElementById(`cell-${i}`).style.backgroundColor = '#FFFFFF';
+        }
     }
     updateDisplayCounts();
+    updateRedCellDisplay(); // Reset red cell count display
 }
 
 window.onload = function() {
@@ -87,6 +87,7 @@ window.onload = function() {
     }
     updateAcceptanceRate();
     updateDisplayCounts();
+    updateRedCellDisplay(); // Initialize red cell count display
 
     // Add event listener to accept count display
     document.getElementById('accept-count').addEventListener('click', () => {
@@ -96,8 +97,7 @@ window.onload = function() {
 
     // Add event listener to decline count display
     document.getElementById('decline-count').addEventListener('click', () => {
-        declineCount++;
-        updateDisplayCounts();
+        resetCount('decline'); // Reset red cell count and display
     });
 
     if ('serviceWorker' in navigator) {
