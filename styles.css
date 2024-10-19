@@ -1,38 +1,19 @@
 body {
     font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Меняем направление на столбец */
     align-items: center;
     height: 100vh;
     margin: 0;
     background-color: #121212;
-    padding: 20px 0;
+    padding: 20px 0; /* Добавляем отступ сверху и снизу */
 }
 
 .display-container {
     display: flex;
-    justify-content: center; /* Центрируем контейнер дисплеев */
-    width: 380px;
-    margin-bottom: 20px;
-}
-
-.display {
-    font-size: 1.5em;
-    text-align: center; /* Центрируем текст */
-    width: 180px;
-    background: #2c2c2c;
-    color: #ffffff;
-    padding: 10px;
-    border-radius: 10px;
-    white-space: nowrap; /* Запрещаем перенос текста */
-}
-
-.green-display {
-    margin-right: 10px;
-}
-
-.red-display {
-    margin-left: 10px;
+    justify-content: space-between;
+    width: 380px; /* Устанавливаем ширину, аналогичную калькулятору */
+    margin-bottom: 20px; /* Добавляем отступ снизу */
 }
 
 .calculator {
@@ -44,6 +25,24 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.display {
+    font-size: 1.5em;
+    text-align: center;
+    width: 180px; /* Устанавливаем ширину дисплея */
+    background: #2c2c2c;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.green-display {
+    margin-right: 10px; /* Добавляем отступ справа для зелёного дисплея */
+}
+
+.red-display {
+    margin-left: 10px; /* Добавляем отступ слева для красного дисплея */
 }
 
 .cells {
