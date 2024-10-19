@@ -10,7 +10,7 @@ function updateAcceptanceRate() {
 
 function updateDisplayCounts() {
     document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declineCount;
+    // Since there's no decline-count in HTML, we are not updating it here
 }
 
 function paint(color) {
@@ -85,6 +85,12 @@ window.onload = function() {
     }
     updateAcceptanceRate();
     updateDisplayCounts();
+
+    // Add event listener to accept count display
+    document.getElementById('accept-count').addEventListener('click', () => {
+        acceptCount++;
+        updateDisplayCounts();
+    });
 
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
