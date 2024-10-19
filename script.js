@@ -10,7 +10,7 @@ function updateAcceptanceRate() {
 
 function updateDisplayCounts() {
     document.getElementById('accept-count').textContent = acceptCount;
-    // Since there's no decline-count in HTML, we are not updating it here
+    document.getElementById('decline-count').textContent = declineCount;
 }
 
 function paint(color) {
@@ -89,6 +89,12 @@ window.onload = function() {
     // Add event listener to accept count display
     document.getElementById('accept-count').addEventListener('click', () => {
         acceptCount++;
+        updateDisplayCounts();
+    });
+
+    // Add event listener to decline count display
+    document.getElementById('decline-count').addEventListener('click', () => {
+        declineCount++;
         updateDisplayCounts();
     });
 
