@@ -16,15 +16,23 @@ body {
     margin-bottom: 20px;
 }
 
-.accepting-display {
+.display {
     font-size: 1.5em;
-    text-align: center;
-    width: 380px; /* Устанавливаем ширину на всю ширину контейнера */
+    text-align: center; /* Центрируем текст */
+    width: 180px;
     background: #2c2c2c;
     color: #ffffff;
     padding: 10px;
     border-radius: 10px;
     white-space: nowrap; /* Запрещаем перенос текста */
+}
+
+.green-display {
+    margin-right: 10px;
+}
+
+.red-display {
+    margin-left: 10px;
 }
 
 .calculator {
