@@ -12,7 +12,7 @@ body {
 .display-container {
     display: flex;
     justify-content: space-between;
-    width: 350px; /* Устанавливаем ширину, аналогичную калькулятору */
+    width: 380px; /* Устанавливаем ширину, аналогичную калькулятору */
     margin-bottom: 20px; /* Добавляем отступ снизу */
 }
 
