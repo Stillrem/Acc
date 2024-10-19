@@ -1,7 +1,20 @@
-let redCount = cellColors.filter(color => color === '#FF0000').length;
+let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
+let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
+const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#FFFFFF');
+let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
+let declinedCount = cellColors.filter(color => color === '#FF0000').length; // Переменная для подсчета красных клеток
 
-function updateRedCountDisplay() {
-    document.getElementById('red-count').textContent = redCount;
+function updateAcceptanceRate() {
+    const acceptanceRate = (acceptedCount / 100) * 100;
+    document.getElementById('acceptance-rate').textContent = `Acceptance Rate: ${acceptanceRate.toFixed(2)}%`;
+}
+
+function updateDisplayCounts() {
+    document.getElementById('accept-count').textContent = acceptCount;
+    document.getElementById('decline-count').textContent = declineCount;
+    document.getElementById('decline-display').textContent = declinedCount; // Обновление отображения количества красных клеток
+    localStorage.setItem('acceptCount', acceptCount);
+    localStorage.setItem('declineCount', declineCount);
 }
 
 function paint(color) {
@@ -11,15 +24,13 @@ function paint(color) {
         acceptCount++;
     } else {
         declineCount++;
-        redCount++;
     }
     updateDisplayCounts();
-    updateRedCountDisplay();
 
     if (cellColors[99] === '#00FF00') {
         acceptedCount--;
     } else if (cellColors[99] === '#FF0000') {
-        redCount--;
+        declinedCount--; // Уменьшение счетчика, если последняя клетка была красной
     }
 
     for (let i = cellColors.length - 1; i > 0; i--) {
@@ -32,6 +43,8 @@ function paint(color) {
 
     if (colorCode === '#00FF00') {
         acceptedCount++;
+    } else {
+        declinedCount++; // Увеличение счетчика, если новая клетка красная
     }
 
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
@@ -48,21 +61,25 @@ function toggleCellColor(cellIndex) {
 
         if (newColor === '#00FF00') {
             acceptedCount++;
-            redCount--;
+            declinedCount--; // Корректируем счетчики соответственно
         } else {
             acceptedCount--;
-            redCount++;
+            declinedCount++;
         }
 
         localStorage.setItem('cellColors', JSON.stringify(cellColors));
         updateAcceptanceRate();
-        updateRedCountDisplay();
     }
 }
 
-function resetRedCount() {
-    redCount = 0;
-    updateRedCountDisplay();
+function resetCount(type) {
+    if (type === 'accept') {
+        acceptCount = 0;
+    } else if (type === 'decline') {
+        declineCount = 0;
+        declinedCount = 0; // Сбрасываем счетчик красных клеток
+    }
+    updateDisplayCounts();
 }
 
 window.onload = function() {
@@ -79,24 +96,20 @@ window.onload = function() {
     }
     updateAcceptanceRate();
     updateDisplayCounts();
-    updateRedCountDisplay();
 
-    // Add event listener to accept count display
+    // Добавление обработчика событий для отображения количества принятых
     document.getElementById('accept-count').addEventListener('click', () => {
         acceptCount++;
         updateDisplayCounts();
     });
 
-    // Add event listener to decline count display
+    // Добавление обработчика событий для отображения количества отклоненных
     document.getElementById('decline-count').addEventListener('click', () => {
         declineCount++;
         updateDisplayCounts();
     });
 
-    // Add event listener for resetting red count
-    document.getElementById('red-reset').addEventListener('click', resetRedCount);
-
-    if ('serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
         .then(registration => {
             console.log('Service Worker registered with scope:', registration.scope);
