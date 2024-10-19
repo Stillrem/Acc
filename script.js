@@ -1,4 +1,3 @@
-javascript
 let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = cellColors.filter(color => color === '#FF0000').length; // Calculate initial red cell count
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#FFFFFF');
