@@ -69,6 +69,22 @@ function paint(color) {
     updateRedCount();
 }
 
+function resetRedCells() {
+    for (let i = 0; i < cellColors.length; i++) {
+        if (cellColors[i] === '#FF0000') {
+            cellColors[i] = '#00FF00';
+            document.getElementById(`cell-${i}`).style.backgroundColor = '#00FF00';
+        }
+    }
+    acceptedCount = cellColors.length;
+    acceptCount = 0;
+    declineCount = 0;
+    localStorage.setItem('cellColors', JSON.stringify(cellColors));
+    updateAcceptanceRate();
+    updateDisplayCounts();
+    updateRedCount();
+}
+
 window.onload = function() {
     const cellsContainer = document.querySelector('.cells');
     for (let i = 0; i < cellColors.length; i++) {
@@ -81,6 +97,9 @@ window.onload = function() {
 
         cellsContainer.appendChild(cell);
     }
+    const resetButton = document.getElementById('reset-button');
+    resetButton.addEventListener('click', resetRedCells);
+
     updateAcceptanceRate();
     updateDisplayCounts();
     updateRedCount();
