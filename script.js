@@ -1,6 +1,6 @@
 let cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#FFFFFF');
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
-let redCount = cellColors.filter(color => color === '#FF0000').length;
+let declineCount = cellColors.filter(color => color === '#FF0000').length;
 let acceptCount = 0;
 let declineCount = 0;
 
