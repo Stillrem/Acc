@@ -18,10 +18,10 @@ body {
 
 .calculator {
     width: 350px;
-    background-color: rgba(30, 30, 30, 0.6);
+    background-color: rgba(30, 30, 30, 0.8);
     padding: 20px;
     border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,15 +33,11 @@ body {
     font-size: 1.5em;
     text-align: center;
     width: 93%;
-    background: rgba(44, 44, 44, 0.6);
+    background: rgba(44, 44, 44, 0.8);
     color: #ffffff;
     padding: 10px;
     border-radius: 10px;
-    backdrop-filter: blur(8px);
-}
-
-.green-display, .red-display {
-    flex: 1;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .cells {
@@ -55,18 +51,16 @@ body {
 .cell {
     width: 30px;
     height: 30px;
-    background-color: rgba(30, 30, 30, 0.7);
+    background-color: rgba(30, 30, 30, 0.8);
     border-radius: 5px;
     border: 1px solid #333333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
-    backdrop-filter: blur(5px);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.cell:active {
-    transform: scale(0.95);
+.cell:active, .button:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
 .buttons {
@@ -84,23 +78,16 @@ body {
     flex: 1;
     margin: 0 5px;
     color: white;
-    background-color: rgba(76, 175, 80, 0.7);
-    transition: transform 0.2s, background-color 0.3s;
+    background-color: rgba(76, 175, 80, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
     backdrop-filter: blur(5px);
 }
 
-.button:active {
-    transform: scale(0.95);
-}
-
 .accept {
-    background-color: rgba(76, 175, 80, 0.7);
+    background-color: rgba(76, 175, 80, 0.8);
 }
 
 .decline {
-    background-color: rgba(244, 67, 54, 0.7);
-}
-
-.button:active .cell {
-    transform: scale(0.95);
+    background-color: rgba(244, 67, 54, 0.8);
 }
