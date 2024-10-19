@@ -15,8 +15,8 @@ function updateDisplayCounts() {
     document.getElementById('decline-count').textContent = `Decline: ${declineCount}`;
 }
 
-function updateRedCountDisplay() {
-    document.getElementById('red-count').textContent = `Red Cells: ${redCount}`;
+function updateDeclineCountDisplay() {
+    document.getElementById('decline-count').textContent = `Decline: ${declineCount}`;
 }
 
 function paint(color) {
@@ -33,7 +33,7 @@ function paint(color) {
         acceptedCount--;
     }
     if (cellColors[99] === '#FF0000') {
-        redCount--;
+       declineCount--;
     }
 
     for (let i = cellColors.length - 1; i > 0; i--) {
@@ -65,10 +65,10 @@ function toggleCellColor(cellIndex) {
 
         if (newColor === '#00FF00') {
             acceptedCount++;
-            redCount--;
+            detlineCount--;
         } else {
             acceptedCount--;
-            redCount++;
+            detlineCount++;
         }
 
         localStorage.setItem('cellColors', JSON.stringify(cellColors));
