@@ -24,7 +24,7 @@ function paint(color) {
     updateDisplayCounts();
 
     if (cellColors[99] === '#00FF00') {
-        acceptedCount = Math.max(0, acceptedCount - 1);
+        acceptedCount--;
     }
 
     for (let i = cellColors.length - 1; i > 0; i--) {
@@ -36,7 +36,7 @@ function paint(color) {
     document.getElementById('cell-0').style.backgroundColor = colorCode;
 
     if (colorCode === '#00FF00') {
-        acceptedCount = Math.min(100, acceptedCount + 1);
+        acceptedCount++;
     }
 
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
@@ -52,9 +52,9 @@ function toggleCellColor(cellIndex) {
         document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
 
         if (newColor === '#00FF00') {
-            acceptedCount = Math.min(100, acceptedCount + 1);
+            acceptedCount++;
         } else {
-            acceptedCount = Math.max(0, acceptedCount - 1);
+            acceptedCount--;
         }
 
         localStorage.setItem('cellColors', JSON.stringify(cellColors));
@@ -73,16 +73,30 @@ function resetCount(type) {
 
 window.onload = function() {
     const cellsContainer = document.querySelector('.cells');
-    
     for (let i = 0; i < cellColors.length; i++) {
         const cell = document.createElement('div');
         cell.className = 'cell';
         cell.id = `cell-${i}`;
         cell.style.backgroundColor = cellColors[i];
-        cell.onclick = () => toggleCellColor(i);
+
+        cell.addEventListener('click', () => toggleCellColor(i));
+
         cellsContainer.appendChild(cell);
     }
-
     updateAcceptanceRate();
     updateDisplayCounts();
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+        .then(registration => {
+            console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch(error => {
+            console.error('Service Worker registration failed:', error);
+        });
+    }
+
+    document.addEventListener('dblclick', function(event) {
+        event.preventDefault();
+    }, { passive: false });
 };
