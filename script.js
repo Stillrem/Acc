@@ -2,7 +2,7 @@ let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#FFFFFF');
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
-let declinedCount = cellColors.filter(color => color === '#FF0000').length; // Подсчёт красных ячеек
+let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
@@ -11,20 +11,13 @@ function updateAcceptanceRate() {
 
 function updateDisplayCounts() {
     document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declinedCount; // Обновление красных ячеек на экране
+    document.getElementById('decline-count').textContent = declinedCount;
     localStorage.setItem('acceptCount', acceptCount);
     localStorage.setItem('declineCount', declineCount);
 }
 
 function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
-
-    if (colorCode === '#00FF00') {
-        acceptCount++;
-    } else {
-        declineCount++;
-    }
-    updateDisplayCounts();
 
     if (cellColors[99] === '#00FF00') {
         acceptedCount--;
@@ -46,6 +39,7 @@ function paint(color) {
         declinedCount++;
     }
 
+    updateDisplayCounts(); // Обновляем отображение после изменения цвета
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
 }
@@ -66,6 +60,7 @@ function toggleCellColor(cellIndex) {
             declinedCount++;
         }
 
+        updateDisplayCounts(); // Обновляем отображение после изменения цвета
         localStorage.setItem('cellColors', JSON.stringify(cellColors));
         updateAcceptanceRate();
     }
@@ -95,13 +90,11 @@ window.onload = function() {
     updateAcceptanceRate();
     updateDisplayCounts();
 
-    // Добавление обработчика событий для отображения счётчика принятия
     document.getElementById('accept-count').addEventListener('click', () => {
         acceptCount++;
         updateDisplayCounts();
     });
 
-    // Добавление обработчика событий для отображения счётчика отклонения
     document.getElementById('decline-count').addEventListener('click', () => {
         declineCount++;
         updateDisplayCounts();
