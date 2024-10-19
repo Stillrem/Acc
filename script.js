@@ -1,5 +1,5 @@
 let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
-let declineCount = cellColors.filter(color => color === '#FF0000').length; // Calculate initial red cell count
+let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#FFFFFF');
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 
@@ -10,7 +10,7 @@ function updateAcceptanceRate() {
 
 function updateDisplayCounts() {
     document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declineCount; // Update decline count display
+    document.getElementById('decline-count').textContent = declineCount;
     localStorage.setItem('acceptCount', acceptCount);
     localStorage.setItem('declineCount', declineCount);
 }
@@ -41,10 +41,6 @@ function paint(color) {
         acceptedCount++;
     }
 
-    if (colorCode === '#FF0000') {
-        declineCount++; // Increment red cell count
-    }
-
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
 }
@@ -59,15 +55,12 @@ function toggleCellColor(cellIndex) {
 
         if (newColor === '#00FF00') {
             acceptedCount++;
-            declineCount--;
         } else {
             acceptedCount--;
-            declineCount++;
         }
 
         localStorage.setItem('cellColors', JSON.stringify(cellColors));
         updateAcceptanceRate();
-        updateDisplayCounts(); // Update display counts after toggle
     }
 }
 
@@ -103,7 +96,7 @@ window.onload = function() {
 
     // Add event listener to decline count display
     document.getElementById('decline-count').addEventListener('click', () => {
-        declineCount = 0; // Reset decline count to zero
+        declineCount++;
         updateDisplayCounts();
     });
 
