@@ -5,7 +5,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background: linear-gradient(135deg, #1e1e1e, #121212);
+    background: linear-gradient(135deg, #202025, #292930);
     padding: 20px 0;
 }
 
@@ -21,7 +21,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 20px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     display: flex;
@@ -38,13 +38,11 @@ body {
     color: #ffffff;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .green-display, .red-display {
-    margin: 0 10px;
+    flex: 1;
 }
 
 .cells {
@@ -58,17 +56,14 @@ body {
 .cell {
     width: 30px;
     height: 30px;
-    background: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
 .cell:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
 }
 
 .buttons {
@@ -87,21 +82,23 @@ body {
     margin: 0 5px;
     color: white;
     background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s, transform 0.3s;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, background-color 0.2s;
 }
 
-.button:hover {
-    transform: translateY(-3px);
-    background-color: rgba(255, 255, 255, 0.2);
+.button:active, .cell:active {
+    transform: scale(0.95);
 }
 
 .accept {
-    background-color: rgba(76, 175, 80, 0.5);
+    background-color: rgba(76, 175, 80, 0.6);
 }
 
 .decline {
-    background-color: rgba(244, 67, 54, 0.5);
+    background-color: rgba(244, 67, 54, 0.6);
+}
+
+.button:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
