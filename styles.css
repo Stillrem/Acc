@@ -1,8 +1,8 @@
 body {
     font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column; /* Меняем направление на столбец */
+    align-items: center;
     height: 100vh;
     margin: 0;
     background-color: #121212;
