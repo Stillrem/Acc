@@ -115,4 +115,15 @@ window.onload = function() {
     document.addEventListener('dblclick', function(event) {
         event.preventDefault();
     }, { passive: false });
+    
+    // Добавляем обработчик для переключателя блокировки тапов
+    document.getElementById('toggle-taps').addEventListener('change', function() {
+        const allowTaps = this.checked; // Проверяем, включен ли переключатель
+
+        // Добавляем обработчик для каждой ячейки, который будет блокировать или разрешать тапы в зависимости от значения allowTaps
+        document.querySelectorAll('.cell').forEach((cell, index) => {
+            cell.style.pointerEvents = allowTaps ? 'auto' : 'none';
+        });
+    });
 };
+
