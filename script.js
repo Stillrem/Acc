@@ -37,6 +37,7 @@ function paint(color) {
         acceptCount++;
         acceptedCount++;
     } else {
+        declineCount++;
         declinedCount++;
     }
 
