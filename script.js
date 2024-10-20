@@ -121,7 +121,7 @@
 
             function toggleLock() {
                 isLocked = !isLocked;
-                localStorage.setItem('isLocked', isLocked);
+                localStorage.setItem('isLocked', isLocked.toString());
                 // Проверяем и устанавливаем состояние блокировки из localStorage
                 isLocked = localStorage.getItem('isLocked') === 'true' || false;
 
