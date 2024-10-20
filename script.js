@@ -3,6 +3,7 @@ let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#FFFFFF');
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 let declinedCount = cellColors.filter(color => color === '#FF0000').length;
+let allowTaps = localStorage.getItem('allowTaps') === 'true'; // Добавляем переменную для хранения состояния переключателя
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
@@ -14,6 +15,11 @@ function updateDisplayCounts() {
     document.getElementById('decline-count').textContent = declinedCount;
     localStorage.setItem('acceptCount', acceptCount);
     localStorage.setItem('declineCount', declineCount);
+}
+
+// Добавляем функцию для сохранения состояния переключателя
+function saveToggleState() {
+    localStorage.setItem('allowTaps', allowTaps.toString());
 }
 
 function paint(color) {
@@ -117,8 +123,11 @@ window.onload = function() {
     }, { passive: false });
     
     // Добавляем обработчик для переключателя блокировки тапов
-    document.getElementById('toggle-taps').addEventListener('change', function() {
-        const allowTaps = this.checked; // Проверяем, включен ли переключатель
+    const toggleTaps = document.getElementById('toggle-taps');
+    toggleTaps.checked = allowTaps; // Устанавливаем значение переключателя при загрузке
+    toggleTaps.addEventListener('change', function() {
+        allowTaps = this.checked; // Проверяем, включен ли переключатель
+        saveToggleState(); // Сохраняем состояние переключателя
 
         // Добавляем обработчик для каждой ячейки, который будет блокировать или разрешать тапы в зависимости от значения allowTaps
         document.querySelectorAll('.cell').forEach((cell, index) => {
@@ -126,4 +135,3 @@ window.onload = function() {
         });
     });
 };
-
