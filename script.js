@@ -1,3 +1,28 @@
+let isTapEnabled = true; // Изначально разрешаем тап
+
+function toggleTap() {
+    isTapEnabled = !isTapEnabled; // Инвертируем значение при каждом вызове
+}
+
+function handleCellTap(cellIndex) {
+    if (isTapEnabled) {
+        // Обработка тапа по ячейке
+        toggleCellColor(cellIndex);
+    }
+}
+
+// Добавляем обработчик для переключения тапа
+document.getElementById('toggle-tap-button').addEventListener('click', () => {
+    toggleTap();
+    const toggleButton = document.getElementById('toggle-tap-button');
+    toggleButton.textContent = isTapEnabled ? 'Disable Tap' : 'Enable Tap';
+});
+
+// Обновляем обработчик тапа для каждой ячейки
+for (let i = 0; i < cellColors.length; i++) {
+    document.getElementById(`cell-${i}`).addEventListener('click', () => handleCellTap(i));
+}
+
 let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
@@ -41,7 +66,7 @@ function paint(color) {
         declinedCount++;
     }
 
-    updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
+    updateDisplayCounts();
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
 }
@@ -62,7 +87,7 @@ function toggleCellColor(cellIndex) {
             declinedCount++;
         }
 
-        updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
+        updateDisplayCounts();
         localStorage.setItem('cellColors', JSON.stringify(cellColors));
         updateAcceptanceRate();
     }
