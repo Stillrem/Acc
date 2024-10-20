@@ -121,7 +121,7 @@ window.onload = function() {
 
     function toggleLock() {
         isLocked = !isLocked;
-        localStorage.setItem('isLocked', isLocked);
+        localStorage.setItem('isLocked', isLocked.toString());
 
         const cells = document.querySelectorAll('.cell');
         cells.forEach((cell, index) => {
