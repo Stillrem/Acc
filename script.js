@@ -123,12 +123,13 @@
 
             function toggleLock() {
                 isLocked = !isLocked;
-                //localStorage.setItem('isLocked', JSON.stringify(isLocked));
+                localStorage.setItem('isLocked', JSON.stringify(isLocked));
 
                 const cells = document.querySelectorAll('.cell');
                 cells.forEach((cell, index) => {
                     cell.style.pointerEvents = isLocked ? 'auto' : 'none';
                 });
+                updateDisplayCounts();
             }
 
             document.getElementById('toggle-switch').addEventListener('click', () => {
