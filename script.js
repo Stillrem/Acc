@@ -3,7 +3,7 @@
         const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
         let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
         let declinedCount = cellColors.filter(color => color === '#FF0000').length;
-        let isLocked = false;
+        let isLocked = localStorage.getItem('isLocked') === 'true';
 
         function updateAcceptanceRate() {
             const acceptanceRate = (acceptedCount / 100) * 100;
@@ -136,11 +136,9 @@
 
             // Lock cells if initially set to locked
             if (isLocked) {
-                isLocked = true;
                 toggleLock();
                 document.getElementById('toggle-switch').textContent = 'Unlock Cells';
             } else {
-                isLocked = false;
                 document.getElementById('toggle-switch').textContent = 'Lock Cells';
             }
         };
