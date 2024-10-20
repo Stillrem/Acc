@@ -132,6 +132,11 @@ window.onload = function() {
         // Добавляем обработчик для каждой ячейки, который будет блокировать или разрешать тапы в зависимости от значения allowTaps
         document.querySelectorAll('.cell').forEach((cell, index) => {
             cell.style.pointerEvents = allowTaps ? 'none' : 'auto';
+            if (allowTaps) {
+            cell.innerHTML = '✔️'; // Устанавливаем галочку при заблокированных тапах
+            } else {
+            cell.innerHTML = ''; // Очищаем содержимое ячейки при разрешенных тапах
+            }
         });
     });
 };
