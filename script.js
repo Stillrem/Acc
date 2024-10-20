@@ -122,6 +122,9 @@
             function toggleLock() {
                 isLocked = !isLocked;
                 localStorage.setItem('isLocked', JSON.stringify(isLocked));
+                
+            const storedIsLocked = JSON.parse(localStorage.getItem('isLocked'));
+                isLocked = storedIsLocked === null ? isLocked : storedIsLocked;
 
                 const cells = document.querySelectorAll('.cell');
                 cells.forEach((cell, index) => {
