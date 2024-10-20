@@ -133,8 +133,6 @@
                 toggleLock();
                 document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
             });
-
-            let isLocked = JSON.parse(localStorage.getItem('isLocked'));
                 
             // Lock cells if initially set to locked
             if (isLocked) {
