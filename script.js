@@ -1,9 +1,8 @@
 let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
-const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
+const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#FFFFFF');
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 let declinedCount = cellColors.filter(color => color === '#FF0000').length;
-let isLocked = localStorage.getItem('isLocked') === 'true' || false;
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
@@ -42,32 +41,30 @@ function paint(color) {
         declinedCount++;
     }
 
-    updateDisplayCounts(); // Обновляем отображение после изменения цвета
+    updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
 }
 
 function toggleCellColor(cellIndex) {
-    if (!isLocked) {
-        const currentColor = cellColors[cellIndex];
-        const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
+    const currentColor = cellColors[cellIndex];
+    const newColor = currentColor === '#00FF00' ? '#FF0000' : '#00FF00';
 
-        if (currentColor !== newColor) {
-            cellColors[cellIndex] = newColor;
-            document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
+    if (currentColor !== newColor) {
+        cellColors[cellIndex] = newColor;
+        document.getElementById(`cell-${cellIndex}`).style.backgroundColor = newColor;
 
-            if (newColor === '#00FF00') {
-                acceptedCount++;
-                declinedCount--;
-            } else {
-                acceptedCount--;
-                declinedCount++;
-            }
-
-            updateDisplayCounts(); // Обновляем отображение после изменения цвета
-            localStorage.setItem('cellColors', JSON.stringify(cellColors));
-            updateAcceptanceRate();
+        if (newColor === '#00FF00') {
+            acceptedCount++;
+            declinedCount--;
+        } else {
+            acceptedCount--;
+            declinedCount++;
         }
+
+        updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
+        localStorage.setItem('cellColors', JSON.stringify(cellColors));
+        updateAcceptanceRate();
     }
 }
 
@@ -118,26 +115,4 @@ window.onload = function() {
     document.addEventListener('dblclick', function(event) {
         event.preventDefault();
     }, { passive: false });
-
-    function toggleLock() {
-        isLocked = !isLocked;
-        localStorage.setItem('isLocked', isLocked.toString());
-
-        const cells = document.querySelectorAll('.cell');
-        cells.forEach((cell, index) => {
-            cell.style.pointerEvents = isLocked ? 'none' : 'auto';
-        });
-    }
-
-    document.getElementById('toggle-switch').addEventListener('click', () => {
-        toggleLock();
-        document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
-    });
-
-    if (isLocked) {
-        toggleLock();
-        document.getElementById('toggle-switch').textContent = 'Unlock Cells';
-    } else {
-        document.getElementById('toggle-switch').textContent = 'Lock Cells';
-    }
 };
