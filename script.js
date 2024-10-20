@@ -121,7 +121,7 @@
 
             function toggleLock() {
                 isLocked = !isLocked;
-                localStorage.setItem('isLocked', JSON.stringif(isLocked));
+                localStorage.setItem('isLocked', isLocked.toString());
 
                 const cells = document.querySelectorAll('.cell');
                 cells.forEach((cell, index) => {
@@ -134,13 +134,10 @@
                 document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
             });
 
-            // Lock cells if initially set to locked
             if (isLocked) {
                 toggleLock();
                 document.getElementById('toggle-switch').textContent = 'Unlock Cells';
-                localStorage.setItem('Unlock Cells', Unlock Cells);
             } else {
                 document.getElementById('toggle-switch').textContent = 'Lock Cells';
-                localStorage.setItem('Lock Cells', Lock Cells);
             }
         };
