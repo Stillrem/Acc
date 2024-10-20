@@ -22,12 +22,14 @@ function paint(color) {
         acceptCount++;
         acceptedCount++; // Update acceptedCount when color changes to green
     } else {
-        declineCount++;
+        declineCount++; // Update declineCount when color changes to red
     }
     updateDisplayCounts();
 
     if (cellColors[99] === '#00FF00') {
         acceptedCount--;
+    } else if (cellColors[99] === '#FF0000') {
+        declineCount--;
     }
 
     for (let i = cellColors.length - 1; i > 0; i--) {
