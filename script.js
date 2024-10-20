@@ -121,11 +121,11 @@
 
             function toggleLock() {
                 isLocked = !isLocked;
-                localStorage.setItem('isLocked', JSON.stringify(isLocked));
+                localStorage.setItem('isLocked', (isLocked);
 
                 const cells = document.querySelectorAll('.cell');
                 cells.forEach((cell, index) => {
-                    cell.style.pointerEvents = isLocked ? 'none' : 'none';
+                    cell.style.pointerEvents = isLocked ? 'auto' : 'none';
                 });
             }
 
