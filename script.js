@@ -2,6 +2,7 @@ let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#FFFFFF');
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
+let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
@@ -10,7 +11,7 @@ function updateAcceptanceRate() {
 
 function updateDisplayCounts() {
     document.getElementById('accept-count').textContent = acceptCount;
-    document.getElementById('decline-count').textContent = declineCount;
+    document.getElementById('decline-count').textContent = declinedCount;
     localStorage.setItem('acceptCount', acceptCount);
     localStorage.setItem('declineCount', declineCount);
 }
@@ -18,15 +19,10 @@ function updateDisplayCounts() {
 function paint(color) {
     const colorCode = color === 'red' ? '#FF0000' : '#00FF00';
 
-    if (colorCode === '#00FF00') {
-        acceptCount++;
-    } else {
-        declineCount++;
-    }
-    updateDisplayCounts();
-
     if (cellColors[99] === '#00FF00') {
         acceptedCount--;
+    } else if (cellColors[99] === '#FF0000') {
+        declinedCount--;
     }
 
     for (let i = cellColors.length - 1; i > 0; i--) {
@@ -38,14 +34,15 @@ function paint(color) {
     document.getElementById('cell-0').style.backgroundColor = colorCode;
 
     if (colorCode === '#00FF00') {
+        acceptCount++;
         acceptedCount++;
+    } else {
+        declinedCount++;
     }
 
+    updateDisplayCounts(); // Обновляем отображение после изменения цвета
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
-
-    // Update acceptedCount after painting the cells
-    acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 }
 
 function toggleCellColor(cellIndex) {
@@ -58,10 +55,13 @@ function toggleCellColor(cellIndex) {
 
         if (newColor === '#00FF00') {
             acceptedCount++;
+            declinedCount--;
         } else {
             acceptedCount--;
+            declinedCount++;
         }
 
+        updateDisplayCounts(); // Обновляем отображение после изменения цвета
         localStorage.setItem('cellColors', JSON.stringify(cellColors));
         updateAcceptanceRate();
     }
@@ -91,13 +91,11 @@ window.onload = function() {
     updateAcceptanceRate();
     updateDisplayCounts();
 
-    // Add event listener to accept count display
     document.getElementById('accept-count').addEventListener('click', () => {
         acceptCount++;
         updateDisplayCounts();
     });
 
-    // Add event listener to decline count display
     document.getElementById('decline-count').addEventListener('click', () => {
         declineCount++;
         updateDisplayCounts();
