@@ -1,6 +1,6 @@
 let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
-const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#FFFFFF');
+const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 
@@ -41,7 +41,7 @@ function paint(color) {
         declinedCount++;
     }
 
-    updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
+    updateDisplayCounts(); // Обновляем отображение после изменения цвета
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
 }
@@ -62,7 +62,7 @@ function toggleCellColor(cellIndex) {
             declinedCount++;
         }
 
-        updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
+        updateDisplayCounts(); // Обновляем отображение после изменения цвета
         localStorage.setItem('cellColors', JSON.stringify(cellColors));
         updateAcceptanceRate();
     }
@@ -115,30 +115,19 @@ window.onload = function() {
     document.addEventListener('dblclick', function(event) {
         event.preventDefault();
     }, { passive: false });
-    const toggleSwitch = document.getElementById('toggle-switch');
-    let isLocked = JSON.parse(localStorage.getItem('isLocked')) || false;
-    toggleSwitch.checked = isLocked;
-    function toggleLock() {
-    isLocked = !isLocked;
-    localStorage.setItem('isLocked', isLocked);
+    const toggleSwitch = document.getElementById('toggleSwitch');
+    toggleSwitch.addEventListener('change', function() {
+    const cellsContainer = document.querySelector('.cells');
+    const cells = cellsContainer.getElementsByClassName('cell');
 
-    if (isLocked) {
-        // Блокировка ячеек
-        document.querySelectorAll('.cell').forEach(cell => {
-            cell.removeEventListener('click', toggleCellColor);
-        });
+    if (toggleSwitch.checked) {
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].style.pointerEvents = 'none';
+        }
     } else {
-        // Разблокировка ячеек
-        document.querySelectorAll('.cell').forEach((cell, index) => {
-            cell.addEventListener('click', () => toggleCellColor(index));
-        });
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].style.pointerEvents = 'auto';
+        }
     }
-}
-
-toggleSwitch.addEventListener('change', toggleLock);
-if (isLocked) {
-    document.querySelectorAll('.cell').forEach(cell => {
-        cell.removeEventListener('click', toggleCellColor);
-    });
-}
+});
 };
