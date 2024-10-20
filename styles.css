@@ -92,15 +92,3 @@ body {
 .decline {
     background-color: rgba(244, 67, 54, 0.8);
 }
-        .cells {
-            display: flex;
-            flex-wrap: wrap;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cell {
-            width: 30px;
-            height: 30px;
-            margin: 2px;
-        }
