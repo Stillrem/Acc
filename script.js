@@ -136,9 +136,11 @@
 
             // Lock cells if initially set to locked
             if (isLocked) {
+                isLocked = true;
                 toggleLock();
                 document.getElementById('toggle-switch').textContent = 'Unlock Cells';
             } else {
+                isLocked = false;
                 document.getElementById('toggle-switch').textContent = 'Lock Cells';
             }
         };
