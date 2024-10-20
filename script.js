@@ -129,6 +129,7 @@ window.onload = function() {
         const cells = document.querySelectorAll('.cell');
         cells.forEach((cell, index) => {
             cell.style.pointerEvents = isLocked ? 'auto' : 'none';
+            updateDisplayCounts();
         });
     }
 
