@@ -1,6 +1,6 @@
 let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
 let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
-const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
+const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#FFFFFF');
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 let declinedCount = cellColors.filter(color => color === '#FF0000').length;
 
@@ -41,7 +41,7 @@ function paint(color) {
         declinedCount++;
     }
 
-    updateDisplayCounts(); // Обновляем отображение после изменения цвета
+    updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
     localStorage.setItem('cellColors', JSON.stringify(cellColors));
     updateAcceptanceRate();
 }
@@ -62,7 +62,7 @@ function toggleCellColor(cellIndex) {
             declinedCount++;
         }
 
-        updateDisplayCounts(); // Обновляем отображение после изменения цвета
+        updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
         localStorage.setItem('cellColors', JSON.stringify(cellColors));
         updateAcceptanceRate();
     }
@@ -115,4 +115,27 @@ window.onload = function() {
     document.addEventListener('dblclick', function(event) {
         event.preventDefault();
     }, { passive: false });
+    javascript
+let isSwitchedOn = false;
+
+function toggleSwitch() {
+    isSwitchedOn = !isSwitchedOn;
+    const switchElement = document.getElementById('toggle-switch');
+
+    if (isSwitchedOn) {
+        switchElement.textContent = 'ON';
+        // Блокировка тапов по ячейкам
+        document.querySelectorAll('.cell').forEach(cell => {
+            cell.style.pointerEvents = 'none';
+        });
+    } else {
+        switchElement.textContent = 'OFF';
+        // Разблокировка тапов по ячейкам
+        document.querySelectorAll('.cell').forEach(cell => {
+            cell.style.pointerEvents = 'auto';
+        });
+    }
+    // Сохранение состояния переключателя
+    localStorage.setItem('isSwitchedOn', isSwitchedOn);
+}
 };
