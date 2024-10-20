@@ -1,3 +1,4 @@
+        По чему не сохраняется isLocked
         let acceptCount = parseInt(localStorage.getItem('acceptCount')) || 0;
         let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
         const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
@@ -121,10 +122,7 @@
 
             function toggleLock() {
                 isLocked = !isLocked;
-                localStorage.setItem('isLocked', JSON.stringify(isLocked));
-                
-            const storedIsLocked = JSON.parse(localStorage.getItem('isLocked'));
-                isLocked = storedIsLocked === null ? isLocked : storedIsLocked;
+                localStorage.setItem('isLocked', isLocked);
 
                 const cells = document.querySelectorAll('.cell');
                 cells.forEach((cell, index) => {
