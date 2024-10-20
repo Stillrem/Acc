@@ -15,7 +15,7 @@ function updateDisplayCounts() {
     document.getElementById('decline-count').textContent = declinedCount;
     localStorage.setItem('acceptCount', acceptCount);
     localStorage.setItem('declineCount', declineCount);
-    localStorage.setItem('isLocked', isLocked); // Добавляем сохранение isLocked в localStorage
+    localStorage.setItem('toggleLock',toggleLock); // Добавляем сохранение isLocked в localStorage
 }
 
 function paint(color) {
