@@ -138,7 +138,9 @@
             if (isLocked) {
                 toggleLock();
                 document.getElementById('toggle-switch').textContent = 'Unlock Cells';
+                localStorage.setItem('Unlock Cells', Unlock Cells);
             } else {
                 document.getElementById('toggle-switch').textContent = 'Lock Cells';
+                localStorage.setItem('Lock Cells', Lock Cells);
             }
         };
