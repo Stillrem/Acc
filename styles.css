@@ -85,13 +85,6 @@ body {
     backdrop-filter: blur(5px);
 }
 
-.button-container {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
 .accept {
     background-color: rgba(76, 175, 80, 0.8);
 }
