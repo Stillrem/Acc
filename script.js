@@ -158,3 +158,12 @@
                 document.getElementById('toggle-switch').textContent = 'Lock Cells';
             }
         };
+
+            // Lock cells if initially set to locked
+            if (isLocked) {
+                toggleUnLock();
+                document.getElementById('toggle-switch').textContent = 'Lock Cells';
+            } else {
+                toggleLock();
+                document.getElementById('toggle-switch').textContent = 'Unlock Cells';
+        }
