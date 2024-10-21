@@ -125,16 +125,16 @@
                 localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
 
                 const cells = document.querySelectorAll('.cell');
-                cells.forEach((cell) => {
+                cells.forEach((cell, index) => {
                     cell.style.pointerEvents = 'none';
                 });
             }
-            function toggleunLock() {
+            function toggleLock() {
                 isLocked = false;
                 localStorage.setItem('isLocked', isLocked ? 'false' : 'true');
 
                 const cells = document.querySelectorAll('.cell');
-                cells.forEach((cell) => {
+                cells.forEach((cell, index) => {
                     cell.style.pointerEvents = 'auto';
                 });
             }
@@ -146,7 +146,7 @@
                 
             // Lock cells if initially set to locked
             if (isLocked) {
-                toggleunLock();
+                toggleLock();
                 document.getElementById('toggle-switch').textContent = 'Unlock Cells';
             } else {
                 document.getElementById('toggle-switch').textContent = 'Lock Cells';
