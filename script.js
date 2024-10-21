@@ -143,5 +143,11 @@
             localStorage.setItem('isLocked', 'false');
             toggleLock();
         });
-             
+            // Lock cells if initially set to locked
+            if (isLocked) {
+                toggleLock();
+                document.getElementById('toggle-switch').textContent = 'Unlock Cells';
+            } else {
+                document.getElementById('toggle-switch').textContent = 'Lock Cells';
+            }
         };
