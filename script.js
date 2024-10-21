@@ -120,8 +120,8 @@
             }, { passive: false });
 
             function toggleLock() {
-                isLocked = true;
-                localStorage.setItem('isLocked', 'true');
+                isLocked = !isLocked;
+                localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
 
                 const cells = document.querySelectorAll('.cell');
                 cells.forEach((cell, index) => {
