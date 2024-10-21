@@ -121,12 +121,12 @@
             }, { passive: false });
 
             function toggleLock() {
-                isLocked = true;
+                isLocked = !isLocked;
                 localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
 
                 const cells = document.querySelectorAll('.cell');
                 cells.forEach((cell, index) => {
-                    cell.style.pointerEvents = isLocked ? 'none' : 'auto';
+                    cell.style.pointerEvents = isLocked ? 'true' : 'false';
                 });
             }
 
