@@ -120,46 +120,29 @@
                 event.preventDefault();
             }, { passive: false });
 
-            // Установка переменной isLocked в зависимости от значения в localStorage или по умолчанию в false
-let isLocked = localStorage.getItem('isLocked') === 'true' || false;
-
-function lockCells() {
+    function lockCells() {
     isLocked = true;
     localStorage.setItem('isLocked', 'true');
-}
-
-function unlockCells() {
-    isLocked = false;
-    localStorage.setItem('isLocked', 'false');
-}
-
-function toggleLock() {
-    if (isLocked) {
-        unlockCells();
-    } else {
-        lockCells();
-    }
-
     const cells = document.querySelectorAll('.cell');
     cells.forEach((cell, index) => {
-        cell.style.pointerEvents = isLocked ? 'none' : 'auto';
+        cell.style.pointerEvents = 'none';
     });
 }
 
-document.getElementById('toggle-switch').addEventListener('click', toggleLock);
-             }
+    function unlockCells() {
+    isLocked = false;
+    localStorage.setItem('isLocked', 'false');
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach((cell, index) => {
+        cell.style.pointerEvents = 'auto';
+    });
+}
 
             document.getElementById('toggle-switch').addEventListener('click', () => {
-            isLocked = true;
-            localStorage.setItem('isLocked', 'true');
-            toggleLock();
-        });
-
-            document.getElementById('toggle-switch').addEventListener('click', () => {
-            isLocked = false;
-            localStorage.setItem('isLocked', 'false');
-            toggleLock();
-        });
+                toggleLock();
+                document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
+            });
+                
             // Lock cells if initially set to locked
             if (isLocked) {
                 toggleLock();
