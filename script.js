@@ -120,7 +120,7 @@
                 event.preventDefault();
             }, { passive: false });
 
-    function lockCells() {
+    function toggleLock() {
     isLocked = true;
     localStorage.setItem('isLocked', 'true');
     const cells = document.querySelectorAll('.cell');
@@ -129,7 +129,7 @@
     });
 }
 
-    function unlockCells() {
+    function toggleLock() {
     isLocked = false;
     localStorage.setItem('isLocked', 'false');
     const cells = document.querySelectorAll('.cell');
