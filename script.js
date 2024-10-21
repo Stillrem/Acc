@@ -140,13 +140,13 @@
             }
 
             document.getElementById('toggle-switch').addEventListener('click', () => {
-                toggleLock();
+                toggleunLock();
                 document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
             });
                 
             // Lock cells if initially set to locked
             if (isLocked) {
-                toggleunLock();
+                toggleLock();
                 document.getElementById('toggle-switch').textContent = 'Unlock Cells';
             } else {
                 document.getElementById('toggle-switch').textContent = 'Lock Cells';
