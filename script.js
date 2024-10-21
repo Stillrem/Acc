@@ -119,26 +119,26 @@
                 event.preventDefault();
             }, { passive: false });
 
-    function toggleLock() {
-    if (isLocked) {
-        isLocked = false;
-        localStorage.setItem('isLocked', 'false');
+            function toggleLock() {
+                isLocked = true;
+                localStorage.setItem('isLocked', 'true');
 
-        const cells = document.querySelectorAll('.cell');
-        cells.forEach((cell, index) => {
-            cell.style.pointerEvents = 'auto';
-        });
+                const cells = document.querySelectorAll('.cell');
+                cells.forEach((cell, index) => {
+                    cell.style.pointerEvents = isLocked ? 'none' : 'auto';
+                });
+            }
 
-        document.getElementById('toggle-switch').textContent = 'Lock Cells';
-    } else {
-        isLocked = true;
-        localStorage.setItem('isLocked', 'true');
+            document.getElementById('toggle-switch').addEventListener('click', () => {
+                toggleLock();
+                document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
+            });
 
-        const cells = document.querySelectorAll('.cell');
-        cells.forEach((cell, index) => {
-            cell.style.pointerEvents = 'none';
-        });
-
-        document.getElementById('toggle-switch').textContent = 'Unlock Cells';
-    }
- };
+            // Lock cells if initially set to locked
+            if (isLocked) {
+                toggleLock();
+                document.getElementById('toggle-switch').textContent = 'Unlock Cells';
+            } else {
+                document.getElementById('toggle-switch').textContent = 'Lock Cells';
+            }
+        };
