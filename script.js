@@ -134,6 +134,11 @@
                 document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
             });
 
+            window.addEventListener( beforeunload',
+               function() {
+            localStorage.set|tem(isLocked', isLocked ? 'true': 'false');
+            };
+                
             // Lock cells if initially set to locked
             if (isLocked) {
                 toggleLock();
