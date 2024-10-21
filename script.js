@@ -3,7 +3,7 @@ let declineCount = parseInt(localStorage.getItem('declineCount')) || 0;
 const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
 let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
 let declinedCount = cellColors.filter(color => color === '#FF0000').length;
-let isLocked = localStorage.getItem('isLocked') === 'true' || false;
+let isLocked = localStorage.getItem('isLocked') === 'true';
 
 function updateAcceptanceRate() {
     const acceptanceRate = (acceptedCount / 100) * 100;
@@ -121,7 +121,7 @@ window.onload = function() {
 
     function toggleLock() {
         isLocked = !isLocked;
-        localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
+        localStorage.setItem('isLocked', isLocked.toString());
 
         const cells = document.querySelectorAll('.cell');
         cells.forEach((cell, index) => {
