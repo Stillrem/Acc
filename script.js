@@ -87,6 +87,7 @@
                 cell.className = 'cell';
                 cell.id = `cell-${i}`;
                 cell.style.backgroundColor = cellColors[i];
+                cell.style.pointerEvents = isLocked ? 'none' : 'auto';
 
                 cell.addEventListener('click', () => toggleCellColor(i));
 
