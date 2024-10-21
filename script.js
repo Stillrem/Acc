@@ -141,11 +141,11 @@ function unlockCells() {
 }
 
 // Добавьте обработчики событий для блокировки и разблокировки
-document.getElementById('lock-cells-button').addEventListener('click', () => {
+document.getElementById('toggle-switch').addEventListener('click', () => {
     lockCells();
 });
 
-document.getElementById('unlock-cells-button').addEventListener('click', () => {
+document.getElementById('toggle-switch').addEventListener('click', () => {
     unlockCells();
 });
 
