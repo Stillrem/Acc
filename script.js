@@ -119,14 +119,25 @@
                 event.preventDefault();
             }, { passive: false });
 
-            function toggleLock() {
-                isLocked = !isLocked;
-                localStorage.setItem('isLocked', 'true');
+function toggleLock() {
+    if (isLocked) {
+        isLocked = false;
+        localStorage.setItem('isLocked', 'false');
 
-                const cells = document.querySelectorAll('.cell');
-                cells.forEach((cell, index) => {
-                    cell.style.pointerEvents = isLocked ? 'none' : 'auto';
-                });
+        const cells = document.querySelectorAll('.cell');
+        cells.forEach((cell, index) => {
+            cell.style.pointerEvents = 'auto';
+        });
+
+        document.getElementById('toggle-switch').textContent = 'Lock Cells';
+    } else {
+        isLocked = true;
+        localStorage.setItem('isLocked', 'true');
+
+        const cells = document.querySelectorAll('.cell');
+        cells.forEach((cell, index) => {
+            cell.style.pointerEvents = 'none';
+        });
             }
 
             document.getElementById('toggle-switch').addEventListener('click', () => {
