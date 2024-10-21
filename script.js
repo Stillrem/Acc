@@ -120,33 +120,26 @@
                 event.preventDefault();
             }, { passive: false });
 
-    function lockCells() {
-    isLocked = true;
-    localStorage.setItem('isLocked', 'true');
+            function toggleLock() {
+                isLocked = true;
+                localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
 
-    const cells = document.querySelectorAll('.cell');
-    cells.forEach((cell) => {
-        cell.style.pointerEvents = 'none';
-    });
-}
+                const cells = document.querySelectorAll('.cell');
+                cells.forEach((cell, index) => {
+                    cell.style.pointerEvents = isLocked ? 'none' : 'auto';
+                });
+            }
 
-function unlockCells() {
-    isLocked = false;
-    localStorage.setItem('isLocked', 'false');
-
-    const cells = document.querySelectorAll('.cell');
-    cells.forEach((cell) => {
-        cell.style.pointerEvents = 'auto';
-    });
-}
-
-// Добавьте обработчики событий для блокировки и разблокировки
-document.getElementById('toggle-switch').addEventListener('click', () => {
-    lockCells();
-});
-
-document.getElementById('toggle-switch').addEventListener('click', () => {
-    unlockCells();
-});
-
+            document.getElementById('toggle-switch').addEventListener('click', () => {
+                toggleLock();
+                document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
+            });
+                
+            // Lock cells if initially set to locked
+            if (isLocked) {
+                toggleLock();
+                document.getElementById('toggle-switch').textContent = 'Unlock Cells';
+            } else {
+                document.getElementById('toggle-switch').textContent = 'Lock Cells';
+            }
         };
