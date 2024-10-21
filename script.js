@@ -120,7 +120,7 @@
                 event.preventDefault();
             }, { passive: false });
 
-            function toggleLock() {
+            function toggleunLock() {
                 isLocked = true;
                 localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
 
@@ -129,7 +129,7 @@
                     cell.style.pointerEvents = 'none';
                 });
             }
-            function toggleunLock() {
+            function toggleLock() {
                 isLocked = false;
                 localStorage.setItem('isLocked', 'false');
 
@@ -140,7 +140,7 @@
             }
 
             document.getElementById('toggle-switch').addEventListener('click', () => {
-                toggleunLock();
+                toggleLock();
                 document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
             });
                 
