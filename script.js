@@ -91,6 +91,11 @@
                 cell.addEventListener('click', () => toggleCellColor(i));
 
                 cellsContainer.appendChild(cell);
+                const cells =
+                document.query SelectorAll(.cell');
+                cells.forEach((cell, index) => {
+                cell.style.pointerEvents = isLocked?
+                'none': 'auto';
             }
             updateAcceptanceRate();
             updateDisplayCounts();
