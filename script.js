@@ -125,16 +125,16 @@
                 localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
 
                 const cells = document.querySelectorAll('.cell');
-                cells.forEach((cell, index) => {
+                cells.forEach((cell) => {
                     cell.style.pointerEvents = 'none';
                 });
             }
-            function unlockCells() {
+            function toggleLock() {
                 isLocked = false;
                 localStorage.setItem('isLocked', 'false');
 
                 const cells = document.querySelectorAll('.cell');
-                cells.forEach((cell, index) => {
+                cells.forEach((cell) => {
                 cell.style.pointerEvents = 'auto';
                 });
             }
