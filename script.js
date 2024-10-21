@@ -129,7 +129,6 @@
             cell.style.pointerEvents = 'auto';
         });
 
-        document.getElementById('toggle-switch').textContent = 'Lock Cells';
     } else {
         isLocked = true;
         localStorage.setItem('isLocked', 'true');
