@@ -3,7 +3,7 @@
         const cellColors = JSON.parse(localStorage.getItem('cellColors')) || Array(100).fill('#00FF00');
         let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
         let declinedCount = cellColors.filter(color => color === '#FF0000').length;
-        let isLocked = localStorage.getItem('isLocked') === 'true' || false;
+        let isLocked = localStorage.getItem('isLocked') === 'true';
 
         function updateAcceptanceRate() {
             const acceptanceRate = (acceptedCount / 100) * 100;
@@ -119,30 +119,26 @@
                 event.preventDefault();
             }, { passive: false });
 
-function toggleLock() {
-    if (isLocked) {
-        isLocked = false;
-        localStorage.setItem('isLocked', 'false');
+            function toggleLock() {
+                isLocked = !isLocked;
+                localStorage.setItem('isLocked', isLocked);
 
-        const cells = document.querySelectorAll('.cell');
-        cells.forEach((cell, index) => {
-            cell.style.pointerEvents = 'auto';
-        });
-
-        document.getElementById('toggle-switch').textContent = 'Lock Cells';
-    } else {
-        isLocked = true;
-        localStorage.setItem('isLocked', 'true');
-
-        const cells = document.querySelectorAll('.cell');
-        cells.forEach((cell, index) => {
-            cell.style.pointerEvents = 'none';
-        });
+                const cells = document.querySelectorAll('.cell');
+                cells.forEach((cell, index) => {
+                    cell.style.pointerEvents = isLocked ? 'none' : 'auto';
+                });
             }
 
-            document.getElementById('toggle-switch').textContent = 'Unlock Cells';
+            document.getElementById('toggle-switch').addEventListener('click', () => {
+                toggleLock();
+                document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
             });
-
+            if (isLocked) {
+            localStorage.setItem('isLocked', 'true');
+            } else {
+            localStorage.setItem('isLocked', 'false');
+            }
+   
             // Lock cells if initially set to locked
             if (isLocked) {
                 toggleLock();
