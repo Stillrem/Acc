@@ -129,7 +129,7 @@
             cell.style.pointerEvents = 'auto';
         });
 
-    } else {
+    } else (isLocked) {
         isLocked = true;
         localStorage.setItem('isLocked', 'true');
 
