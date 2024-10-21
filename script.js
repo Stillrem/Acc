@@ -4,7 +4,6 @@
         let acceptedCount = cellColors.filter(color => color === '#00FF00').length;
         let declinedCount = cellColors.filter(color => color === '#FF0000').length;
         let isLocked = localStorage.getItem('isLocked') === 'true' ? true : false;
-        let isUnlocked = localStorage.getItem('isUnlocked') === 'true' ? true : false;
 
         function updateAcceptanceRate() {
             const acceptanceRate = (acceptedCount / 100) * 100;
@@ -43,7 +42,7 @@
                 declinedCount++;
             }
 
-            updateDisplayCounts(); // Обновляем отображение после изменения цвета
+            updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
             localStorage.setItem('cellColors', JSON.stringify(cellColors));
             updateAcceptanceRate();
         }
@@ -65,7 +64,7 @@
                         declinedCount++;
                     }
 
-                    updateDisplayCounts(); // Обновляем отображение после изменения цвета
+                    updateDisplayCounts(); // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¾ÑÐ¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ ÑÐ²ÐµÑÐ°
                     localStorage.setItem('cellColors', JSON.stringify(cellColors));
                     updateAcceptanceRate();
                 }
@@ -131,8 +130,8 @@
                 });
             }
             function toggleUnLock() {
-                isUnlocked = false;
-                localStorage.setItem('isUnlocked', isUnlocked ? 'false' : 'true');
+                isLocked = false;
+                localStorage.setItem('isLocked', isLocked ? 'false' : 'true');
 
                 const cells = document.querySelectorAll('.cell');
                 cells.forEach((cell, index) => {
