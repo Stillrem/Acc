@@ -120,28 +120,35 @@
                 event.preventDefault();
             }, { passive: false });
 
-    function toggleLock() {
+    function lockCells() {
     isLocked = true;
     localStorage.setItem('isLocked', 'true');
+
     const cells = document.querySelectorAll('.cell');
-    cells.forEach((cell, index) => {
+    cells.forEach((cell) => {
         cell.style.pointerEvents = 'none';
     });
 }
 
-    function toggleLock() {
+function unlockCells() {
     isLocked = false;
     localStorage.setItem('isLocked', 'false');
+
     const cells = document.querySelectorAll('.cell');
-    cells.forEach((cell, index) => {
+    cells.forEach((cell) => {
         cell.style.pointerEvents = 'auto';
     });
 }
 
-            document.getElementById('toggle-switch').addEventListener('click', () => {
-                toggleLock();
-                document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
-            });
+// Добавьте обработчики событий для блокировки и разблокировки
+document.getElementById('lock-cells-button').addEventListener('click', () => {
+    lockCells();
+});
+
+document.getElementById('unlock-cells-button').addEventListener('click', () => {
+    unlockCells();
+});
+
                 
             // Lock cells if initially set to locked
             if (isLocked) {
