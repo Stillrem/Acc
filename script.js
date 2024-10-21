@@ -139,8 +139,9 @@
             cell.style.pointerEvents = 'none';
         });
             }
-
-        document.getElementById('toggle-switch').textContent = 'Unlock Cells';
+                document.getElementById('toggle-switch').addEventListener('click', () => {
+                toggleLock();
+                document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';         
             });
 
             // Lock cells if initially set to locked
