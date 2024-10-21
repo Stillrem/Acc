@@ -122,7 +122,7 @@
 
             function toggleLock() {
                 isLocked = true;
-                localStorage.setItem('isLocked', 'true');
+                localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
 
                 const cells = document.querySelectorAll('.cell');
                 cells.forEach((cell) => {
@@ -131,7 +131,7 @@
             }
             function toggleunLock() {
                 isLocked = false;
-                localStorage.setItem('isLocked', 'false');
+                localStorage.setItem('isLocked', isLocked ? 'false' : 'true');
 
                 const cells = document.querySelectorAll('.cell');
                 cells.forEach((cell) => {
