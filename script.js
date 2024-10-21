@@ -126,7 +126,7 @@
 
                 const cells = document.querySelectorAll('.cell');
                 cells.forEach((cell, index) => {
-                    cell.style.pointerEvents = isLocked ? 'none' : 'auto';
+                    cell.style.pointerEvents = 'none';
                 });
             }
             function unlockCells() {
@@ -134,7 +134,7 @@
                 localStorage.setItem('isLocked', 'false');
 
                 const cells = document.querySelectorAll('.cell');
-                cells.forEach((cell) => {
+                cells.forEach((cell, index) => {
                 cell.style.pointerEvents = 'auto';
                 });
             }
