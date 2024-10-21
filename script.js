@@ -154,17 +154,8 @@
             if (isLocked) {
                 toggleLock();
                 document.getElementById('toggle-switch').textContent = 'Unlock Cells';
-            } else {
+            } else (isUnloked) {
                 toggleunUnLock();
                 document.getElementById('toggle-switch').textContent = 'Lock Cells';
             }
         };
-
-            // Lock cells if initially set to locked
-            if (isUnlocked) {
-                toggleUnLock();
-                document.getElementById('toggle-switch').textContent = 'Lock Cells';
-            } else {
-                toggleLock();
-                document.getElementById('toggle-switch').textContent = 'Unlock Cells';
-        }
