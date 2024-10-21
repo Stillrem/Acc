@@ -121,7 +121,7 @@
             }, { passive: false });
 
             function toggleLock() {
-                isLocked = !isLocked;
+                isLocked = true;
                 localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
 
                 const cells = document.querySelectorAll('.cell');
@@ -130,7 +130,7 @@
                 });
             }
             function toggleUnLock() {
-                isLocked = !isLocked;
+                isLocked = true;
                 localStorage.setItem('isLocked', isLocked ? 'false' : 'true');
 
                 const cells = document.querySelectorAll('.cell');
