@@ -121,20 +121,29 @@
             }, { passive: false });
 
             function toggleLock() {
-                isLocked = !isLocked;
-                localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
+            isLocked = !isLocked; // Переключаем значение isLocked между true и false
+            localStorage.setItem('isLocked', isLocked ? 'true' : 'false');
 
-                const cells = document.querySelectorAll('.cell');
-                cells.forEach((cell, index) => {
-                    cell.style.pointerEvents = isLocked ? 'none' : 'auto';
-                });
-            }
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach((cell, index) => {
+             cell.style.pointerEvents = isLocked ? 'none' : 'auto';
+        });
 
-            document.getElementById('toggle-switch').addEventListener('click', () => {
-                toggleLock();
-                document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
-            });
-                
+             document.getElementById('toggle-switch').textContent = isLocked ? 'Unlock Cells' : 'Lock Cells';
+             }
+
+            document.getElementById('toggle-switch-true').addEventListener('click', () => {
+            isLocked = true;
+            localStorage.setItem('isLocked', 'true');
+            toggleLock();
+        });
+
+            document.getElementById('toggle-switch-false').addEventListener('click', () => {
+            isLocked = false;
+            localStorage.setItem('isLocked', 'false');
+            toggleLock();
+        });
+             
             // Lock cells if initially set to locked
             if (isLocked) {
                 toggleLock();
