@@ -129,7 +129,7 @@
                     cell.style.pointerEvents = 'none';
                 });
             }
-            function toggleLock() {
+            function toggleunLock() {
                 isLocked = false;
                 localStorage.setItem('isLocked', 'false');
 
@@ -146,7 +146,7 @@
                 
             // Lock cells if initially set to locked
             if (isLocked) {
-                toggleLock();
+                toggleunLock();
                 document.getElementById('toggle-switch').textContent = 'Unlock Cells';
             } else {
                 document.getElementById('toggle-switch').textContent = 'Lock Cells';
