@@ -129,7 +129,7 @@
                     cell.style.pointerEvents = 'none';
                 });
             }
-            function toggleLock() {
+            function toggleUnLock() {
                 isLocked = false;
                 localStorage.setItem('isLocked', isLocked ? 'false' : 'true');
 
@@ -149,6 +149,7 @@
                 toggleLock();
                 document.getElementById('toggle-switch').textContent = 'Unlock Cells';
             } else {
+                toggleunUnLock();
                 document.getElementById('toggle-switch').textContent = 'Lock Cells';
             }
         };
