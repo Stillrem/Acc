@@ -141,4 +141,4 @@
 
         document.getElementById('toggle-switch').textContent = 'Unlock Cells';
     }
-}
+ };
