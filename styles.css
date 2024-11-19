@@ -9,7 +9,7 @@ body {
     background-size: cover; /* Изображение будет покрывать весь фон */
     background-attachment: fixed; /* Фон будет зафиксирован при прокрутке */
     background-position: center; /* Центрирование фона */
-    /*background-color: #121212;*/
+    background-color: #121212;
     padding: 20px 0;
 }
 
